@@ -63,7 +63,7 @@
     </dependencies>
 
     <build>
-        <finalName>sms-center</finalName>
+        <finalName>sms</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
