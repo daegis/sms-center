@@ -44,16 +44,19 @@ public class SmsController {
         message.setCreateTime(LocalDateTime.now());
         commonService.save(message);
         // 发送电子邮件
-        try {
-            SimpleMailMessage msg = new SimpleMailMessage();
-            msg.setFrom("daegis@126.com");
-            msg.setTo("daegis@yeah.net");
-            msg.setSubject(String.format("转发的%s发来的短信", from));
-            msg.setText(ctx);
-            mailSender.send(msg);
-        } catch (Exception e) {
-            log.error("邮件发送失败", e);
-        }
+        new Thread(() -> {
+            try {
+                SimpleMailMessage msg = new SimpleMailMessage();
+                msg.setFrom("daegis@126.com");
+                msg.setTo("daegis@yeah.net");
+                msg.setSubject(String.format("转发的%s发来的短信", from));
+                msg.setText(ctx);
+                mailSender.send(msg);
+                log.info("邮件发送成功");
+            } catch (Exception e) {
+                log.error("邮件发送失败", e);
+            }
+        }).start();
         return "OK";
     }
 }
