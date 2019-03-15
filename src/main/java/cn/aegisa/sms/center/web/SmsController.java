@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDateTime;
 import java.util.Map;
 
 /**
@@ -41,7 +40,7 @@ public class SmsController {
         Message message = new Message();
         message.setContext(ctx);
         message.setSender(from);
-        message.setCreateTime(LocalDateTime.now());
+//        message.setCreateTime(LocalDateTime.now());
         commonService.save(message);
         // 发送电子邮件
         new Thread(() -> {
