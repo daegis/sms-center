@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 
 /**
- * @author xianyingda@guazi.com
+ * @author xianyingda@gmail.com
  * @serial
  * @since 2019-03-12 17:30
  */
