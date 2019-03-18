@@ -15,6 +15,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -31,6 +32,8 @@ public class StatusChecker {
 
     @Autowired
     private DingPusher pusher;
+
+    private boolean searchFesco = true;
 
     @Scheduled(cron = "0 0/20 * * * ?")
     public void checkStatus() throws Exception {
@@ -64,8 +67,33 @@ public class StatusChecker {
             }
         } catch (Exception e) {
             log.error("监控异常", e);
-            pusher.pushTextMessage(new DingTextMessage("监控已失效，请重启"));
+            pusher.pushTextMessage(new DingTextMessage("gjj监控已失效，请重启"));
         }
         client.close();
+    }
+
+    @Scheduled(cron = "0 0/20 * * * ?")
+    public void checkFesco() {
+        try {
+            if (searchFesco) {
+                RestTemplate template = new RestTemplate();
+                String result = template.getForObject("https://wxhelo.fesco.com.cn/api/?appkey=weixin&method=GetData&parm={json}", String.class, "{\"name\":\"sel1\",\"ct\":\"8\",\"user\":\"18698889280|2019-03-11|70DADB406CDEEFDBB62ABECF71FB95BD\"}");
+                result = result.substring(1, result.length() - 1);
+                JSONObject jsonResult = JSON.parseObject(result);
+                JSONArray data = jsonResult.getJSONArray("Data");
+                int size = data.size();
+                String msg = jsonResult.getString("Msg");
+                String code = jsonResult.getString("Code");
+                log.info("code:{},msg:{}", code, msg);
+                if (size != 0) {
+                    // found fesco
+                    searchFesco = false;
+                    pusher.pushTextMessage(new DingTextMessage("fesco found! 请留意"));
+                }
+            }
+        } catch (Exception e) {
+            log.error("监控异常", e);
+            pusher.pushTextMessage(new DingTextMessage("fesco监控已失效，请关注"));
+        }
     }
 }
