@@ -38,11 +38,11 @@ public class StatusChecker {
     @Scheduled(cron = "0 0/20 * * * ?")
     public void checkStatus() throws Exception {
         CloseableHttpClient client = HttpClients.createDefault();
-        HttpPost post = new HttpPost("https://weixin.bjgjj.gov.cn/weixin/NGM2NmQ1ZWY2ZmJhNGY5YjlkNjc4MWVmMzBlZWY1NDY0YzAyY2JlMDJjMjg0Y2NjYTE1YTlhM2MxZmEzYzIyMjE1NTI2MzE2NDkwMjY.json?fromuser=o3ioNxC1L8f6Wx_FOZ2AiTabfqV4&touser=gh_d7dfe024a186&method=doExecute");
-        CloseableHttpResponse response = client.execute(post);
-        InputStream content = response.getEntity().getContent();
-        String s = IOUtils.toString(content, StandardCharsets.UTF_8);
         try {
+            HttpPost post = new HttpPost("https://weixin.bjgjj.gov.cn/weixin/NGM2NmQ1ZWY2ZmJhNGY5YjlkNjc4MWVmMzBlZWY1NDY0YzAyY2JlMDJjMjg0Y2NjYTE1YTlhM2MxZmEzYzIyMjE1NTI2MzE2NDkwMjY.json?fromuser=o3ioNxC1L8f6Wx_FOZ2AiTabfqV4&touser=gh_d7dfe024a186&method=doExecute");
+            CloseableHttpResponse response = client.execute(post);
+            InputStream content = response.getEntity().getContent();
+            String s = IOUtils.toString(content, StandardCharsets.UTF_8);
             JSONObject resultObj = JSON.parseObject(s);
             JSONArray resultArray = resultObj.getJSONArray("result");
             JSONArray resultArray0 = resultArray.getJSONArray(0);
