@@ -72,7 +72,7 @@ public class StatusChecker {
         client.close();
     }
 
-    @Scheduled(cron = "0 0/20 * * * ?")
+    @Scheduled(cron = "0/5 * * * * ?")
     public void checkFesco() {
         try {
             if (searchFesco) {
