@@ -35,7 +35,7 @@ public class StatusChecker {
 
     private boolean searchFesco = true;
 
-    @Scheduled(cron = "0 0/20 * * * ?")
+    @Scheduled(cron = "0 0/10 * * * ?")
     public void checkStatus() throws Exception {
         CloseableHttpClient client = HttpClients.createDefault();
         try {
@@ -72,7 +72,7 @@ public class StatusChecker {
         client.close();
     }
 
-    @Scheduled(cron = "0/5 * * * * ?")
+    @Scheduled(cron = "0 0/10 * * * ?")
     public void checkFesco() {
         try {
             if (searchFesco) {
