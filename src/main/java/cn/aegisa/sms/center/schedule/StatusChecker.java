@@ -22,14 +22,23 @@ public class StatusChecker {
     @Autowired
     private DingPusher pusher;
 
-    @Scheduled(cron = "0/20 0/1 * * * ?")
+    private int count = 10;
+
+    @Scheduled(cron = "0/10 0/1 * * * ?")
     public void webChecker() {
         HttpRequest get = HttpUtil.createGet("http://zk.hngaozhong.com/");
         get.timeout(5000);
         try {
             HttpResponse execute = get.execute();
             int status = execute.getStatus();
-            pusher.pushTextMessage(new DingTextMessage("这个网站居然在五秒超时时间内响应了！状态码：" + status));
+            if (status < 400) {
+                if (count > 0) {
+                    pusher.pushTextMessage(new DingTextMessage("网站好像是可以访问啦！！！"));
+                }
+                this.count--;
+            } else {
+                log.info("状态码：" + status);
+            }
         } catch (Exception e) {
             log.info("连接超时");
         }
