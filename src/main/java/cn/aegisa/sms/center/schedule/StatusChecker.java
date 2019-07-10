@@ -26,7 +26,7 @@ public class StatusChecker {
 
     @Scheduled(cron = "0/10 0/1 * * * ?")
     public void webChecker() {
-        HttpRequest get = HttpUtil.createGet("http://zk.hngaozhong.com/");
+        HttpRequest get = HttpUtil.createGet("http://zk.hagaozhong.com/");
         get.timeout(5000);
         try {
             HttpResponse execute = get.execute();
