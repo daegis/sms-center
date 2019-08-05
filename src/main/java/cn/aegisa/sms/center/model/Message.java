@@ -3,7 +3,7 @@ package cn.aegisa.sms.center.model;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 
 /**
@@ -19,7 +19,7 @@ public class Message implements Serializable {
 
     private String sender;
 
-    private Date createTime;
+    private LocalDateTime createTime;
 
 }
 
