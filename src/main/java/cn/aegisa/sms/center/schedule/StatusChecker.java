@@ -1,6 +1,7 @@
 package cn.aegisa.sms.center.schedule;
 
 import cn.aegisa.sms.center.push.DingPusher;
+import cn.aegisa.sms.center.service.TaobaoSkuService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -19,9 +20,17 @@ public class StatusChecker {
     @Autowired
     private DingPusher pusher;
 
+    @Autowired
+    private TaobaoSkuService taobaoSkuService;
 
-    @Scheduled(cron = "0/15 0/1 * * * ?")
+
+    @Scheduled(cron = "0 0/10 * * * ?")
     public void webChecker() {
+        try {
+            taobaoSkuService.processTBSku();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Scheduled(cron = "0/15 0/1 * * * ?")
