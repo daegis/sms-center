@@ -33,7 +33,7 @@ public class TaobaoSkuServiceImpl implements TaobaoSkuService {
     @Value("${tb.rouge.url}")
     private String url;
 
-    private List<String> skuList = CollectionUtil.list(false, "4158573081668", "4158573081669", "4158573081672");
+    private List<String> skuList = CollectionUtil.list(false, "4158573081669", "4158573081672");
 
     @Override
     public void processTBSku() {
