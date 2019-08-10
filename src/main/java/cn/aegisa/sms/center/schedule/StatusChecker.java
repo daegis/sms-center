@@ -24,7 +24,7 @@ public class StatusChecker {
     private TaobaoSkuService taobaoSkuService;
 
 
-    @Scheduled(cron = "0 0/25 * * * ?")
+    @Scheduled(cron = "0 0/20 * * * ?")
     public void webChecker() {
         try {
             taobaoSkuService.processTBSku();
