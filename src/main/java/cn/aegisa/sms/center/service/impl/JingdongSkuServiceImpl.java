@@ -26,7 +26,7 @@ public class JingdongSkuServiceImpl implements JingdongSkuService {
         ClassPathResource classPathResource = new ClassPathResource("go.sh");
         @Cleanup InputStream inputStream = classPathResource.getInputStream();
         String s = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
-        @Cleanup Process process = Runtime.getRuntime().exec(s);
+        Process process = Runtime.getRuntime().exec(s);
         @Cleanup InputStream processInputStream = process.getInputStream();
         @Cleanup BufferedReader input = new BufferedReader(new InputStreamReader(processInputStream));
 
