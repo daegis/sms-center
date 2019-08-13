@@ -30,7 +30,9 @@ public class JingdongSkuServiceImpl implements JingdongSkuService {
         @Cleanup InputStream processInputStream = process.getInputStream();
         @Cleanup BufferedReader input = new BufferedReader(new InputStreamReader(processInputStream));
 
-        String s1 = input.readLine();
-        log.info(s1);
+        String s1;
+        while ((s1 = input.readLine()) != null) {
+            log.info(s1);
+        }
     }
 }
