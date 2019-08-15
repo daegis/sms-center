@@ -2,6 +2,7 @@ package cn.aegisa.sms.center.web;
 
 import cn.aegisa.sms.center.model.Student;
 import cn.aegisa.sms.center.service.JingdongSkuService;
+import cn.aegisa.sms.center.service.TaobaoSkuService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,11 +21,15 @@ public class TestController {
     @Autowired
     private JingdongSkuService jingdongSkuService;
 
+    @Autowired
+    private TaobaoSkuService taobaoSkuService;
+
     @RequestMapping("/aaa")
     @ResponseBody
     public Object doTest(Student student) {
         try {
             jingdongSkuService.processJDScanner();
+            taobaoSkuService.processTBSku();
         } catch (Exception e) {
             e.printStackTrace();
         }
