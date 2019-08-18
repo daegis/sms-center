@@ -30,11 +30,6 @@ public class StatusChecker {
 
     @Scheduled(cron = "0 0/30 * * * ?")
     public void webChecker() {
-        try {
-            taobaoSkuService.processTBSku();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Scheduled(cron = "0 0/15 * * * ?")
