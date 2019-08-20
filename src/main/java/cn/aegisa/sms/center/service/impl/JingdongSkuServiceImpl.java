@@ -48,7 +48,7 @@ public class JingdongSkuServiceImpl implements JingdongSkuService {
         log.info(body);
         JSONObject bodyObject = JSON.parseObject(body);
         String a = bodyObject.getJSONObject("cartInfo").getJSONArray("vendors").getJSONObject(0).getJSONArray("sorted").getJSONObject(0)
-                .getJSONObject("item").getString("Price");
+                .getJSONObject("item").getString("priceRevert");
         log.info(a);
         BigDecimal price = new BigDecimal(a);
         if (price.compareTo(BigDecimal.valueOf(1399.00)) != 0) {
