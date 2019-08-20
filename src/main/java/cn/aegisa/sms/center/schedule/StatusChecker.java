@@ -28,11 +28,11 @@ public class StatusChecker {
     private JingdongSkuService jingdongSkuService;
 
 
-    @Scheduled(cron = "0 0/30 * * * ?")
+    //@Scheduled(cron = "0 0/30 * * * ?")
     public void webChecker() {
     }
 
-    @Scheduled(cron = "0 0/15 * * * ?")
+    @Scheduled(cron = "0 0/10 * * * ?")
     public void web1Checker() {
         try {
             jingdongSkuService.processJDScanner();
