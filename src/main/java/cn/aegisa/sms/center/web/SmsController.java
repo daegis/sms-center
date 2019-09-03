@@ -6,7 +6,6 @@ import cn.aegisa.sms.center.push.DingTextMessage;
 import cn.aegisa.sms.center.vo.sms.Resp;
 import cn.aegisa.sms.center.vo.sms.SmsPublish;
 import cn.aegisa.sms.center.vo.sms.SmsResp;
-import cn.aegisa.spring.boot.mybatis.component.service.ICommonService;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +26,6 @@ import java.time.LocalDateTime;
 @Slf4j
 public class SmsController {
 
-    @Autowired
-    private ICommonService commonService;
 
     @Autowired
     private JavaMailSender mailSender;
@@ -44,7 +41,6 @@ public class SmsController {
         message.setContext(publish.getMessage());
         message.setSender(publish.getFrom());
         message.setCreateTime(LocalDateTime.now());
-        commonService.save(message);
         pusher.pushTextMessage(new DingTextMessage(publish.getMessage()));
         return new Resp().setPayload(new SmsResp().setSuccess("true"));
     }
