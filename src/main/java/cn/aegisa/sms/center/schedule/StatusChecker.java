@@ -43,7 +43,7 @@ public class StatusChecker {
     public void webChecker() {
     }
 
-    @Scheduled(cron = "0 0/15 * * * ?")
+    //@Scheduled(cron = "0 0/15 * * * ?")
     public void web1Checker() {
         Process process = null;
         List<String> processList = new ArrayList<String>();
